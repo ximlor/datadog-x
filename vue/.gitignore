@@ -1,0 +1,7 @@
+.DS_Store
+node_modules
+dist
+.project
+src/config/*.tmp
+src/config/env.js
+npm-debug.log
