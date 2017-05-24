@@ -21,3 +21,12 @@ services:
       extra_hosts:
           - "dockerhost:${DOCKER_HOST_IP}"
       tty: true
+
+### Node Container ###########################
+
+    node:
+      build:
+        context: ./node
+      volumes_from:
+        - applications
+      tty: true

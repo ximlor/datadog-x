@@ -97,40 +97,6 @@ RUN if [ ${APP_ENV} = local ]; then \
 COPY ./xdebug.ini /etc/php/7.0/cli/conf.d/xdebug.ini
 
 #####################################
-# Node / NVM:
-#####################################
-
-USER laradock
-
-# Check if NVM needs to be installed
-ARG NODE_VERSION=stable
-ENV NODE_VERSION ${NODE_VERSION}
-ENV NVM_DIR /home/laradock/.nvm
-
-ARG APP_ENV=production
-
-RUN if [ ${APP_ENV} = local ]; then \
-    # Install nvm (A Node Version Manager)
-        echo "" >> ~/.bashrc && \
-        echo "export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node" >> ~/.bashrc && \
-        . ~/.bashrc && \
-        curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash && \
-        . $NVM_DIR/nvm.sh && \
-        nvm install ${NODE_VERSION} && \
-        nvm use ${NODE_VERSION} && \
-        nvm alias ${NODE_VERSION} && \
-        npm install -g gulp bower vue-cli \
-;fi
-
-# Wouldn't execute when added to the RUN statement in the above block
-# Source NVM when loading bash since ~/.profile isn't loaded on non-login shell
-RUN if [ ${APP_ENV} = local ]; then \
-    echo "" >> ~/.bashrc && \
-    echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc && \
-    echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.bashrc \
-;fi
-
-#####################################
 # Non-root user : PHPUnit path
 #####################################
 
