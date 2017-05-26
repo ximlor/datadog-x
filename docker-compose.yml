@@ -22,7 +22,7 @@ services:
           - "dockerhost:${DOCKER_HOST_IP}"
       tty: true
 
-### Node Container ###########################
+### Node Container ##########################################
 
     node:
       build:
@@ -30,3 +30,19 @@ services:
       volumes_from:
         - applications
       tty: true
+
+### PHP-FPM Container #######################################
+
+    php-fpm:
+      build:
+        context: ./docker/php-fpm
+        args:
+          - APP_ENV=${APP_ENV}
+      volumes_from:
+        - applications
+      expose:
+        - "9000"
+      depends_on:
+        - workspace
+      extra_hosts:
+        - "dockerhost:${DOCKER_HOST_IP}"
