@@ -19,10 +19,10 @@ class Map
             'subdistrict' => $subdistrict[$level],
         ];
 
-//        $key_redis = 'district:' . $level . ':' . ($adcode ?? 'all');
-//        if ($cache = Redis::get($key_redis)) {
-//            return json_decode($cache, true);
-//        }
+        $key_redis = 'district:' . $level;
+        if ($cache = Redis::get($key_redis)) {
+            return json_decode($cache, true);
+        }
 
         $url = 'http://restapi.amap.com/v3/config/district';
         $result = json_decode(app('curl')->to($url)->withData($params)->get(), true) ?? [];

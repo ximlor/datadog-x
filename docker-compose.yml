@@ -63,3 +63,19 @@ services:
           - "80:80"
       depends_on:
           - php-fpm
+
+### Redis Container #########################################
+
+    redis:
+      build: ./docker/redis
+      volumes:
+        - redis:/data
+      ports:
+        - "6379:6379"
+
+### Volumes Setup ###########################################
+
+volumes:
+  redis:
+    driver: "local"
+
