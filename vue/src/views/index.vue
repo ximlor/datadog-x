@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="layout-copy">
-                    2011-2016 &copy; TalkingData {{ msg }}
+                    2017 &copy; ZZX
                 </div>
             </i-col>
         </Row>

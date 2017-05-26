@@ -5,3 +5,5 @@ dist
 src/config/*.tmp
 src/config/env.js
 npm-debug.log
+/index.html
+/index_prod.html
