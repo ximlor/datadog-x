@@ -30,14 +30,31 @@ class Map
         $districts = [];
         if (!empty($result['status'])) {
             if (!empty($result['districts'])) {
-                $districts = current($result['districts'])['districts'] ?? [];
-                foreach ($districts as $district) {
+                $provinces = current($result['districts'])['districts'] ?? [];
+                $districts = [];
+                foreach ($provinces as $province) {
+                    $cities = $province['districts'];
+                    if (empty($cities)) {
+                        continue;
+                    }
+
+                    $district = [
+                        'value' => $province['center'],
+                        'label' => $province['name'],
+                        'children' => [],
+                    ];
+                    foreach ($cities as $city) {
+                        $district['children'][] = [
+                            'value' => $city['center'],
+                            'label' => $city['name'],
+                        ];
+                    }
+                    $districts[] = $district;
                 }
             }
         }
 
-//        Redis::set($key_redis, json_encode($districts));
-
+        Redis::set($key_redis, json_encode($districts));
         return $districts;
     }
 }

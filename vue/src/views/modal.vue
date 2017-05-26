@@ -1,13 +1,13 @@
 <template>
     <div>
-        <!--<Button type="primary" @click="load">更改城市</Button>-->
-
-        <Modal
-                v-model="modal1"
-                title="选择城市"
-                @on-ok="ok"
-                @on-cancel="cancel">
-            <selector v-on:change="update" msg="abc"></selector>
+        <Modal v-model="modal1" title="选择城市" @on-ok="ok" @on-cancel="cancel"
+               :closable="closable" :mask-closable="closable">
+            <selector @change="update"></selector>
+            <div slot="footer">
+                <Button type="info" size="large" long
+                        @click="ok" :disabled="isInvalid">确定
+                </Button>
+            </div>
         </Modal>
     </div>
 </template>
@@ -16,28 +16,31 @@
     export default {
         data () {
             return {
-                modal1: false
+                modal1: false,
+                closable: true,
+                isInvalid: true,
             }
         },
         methods: {
             ok () {
-                this.$Message.info('点击了确定');
+                this.modal1 = false
+                this.$emit('location-ok', this.selected)
             },
             cancel () {
-                this.$Message.info('点击了取消');
+                this.$Message.info('取消');
             },
             load(){
                 this.modal1 = true
             },
             update (value) {
                 console.log(value)
-                this.selected = value[value.length - 1]
+                this.selected = value
+                this.isInvalid = false
             }
         },
         created: function () {
             this.modal1 = !this.place.name
-            if (this.modal1) {
-            }
+            this.closable = !!this.place.name
         },
         components: {
             selector

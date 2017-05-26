@@ -59,9 +59,9 @@
         transition : width .2s ease-in-out;
     }
 
-    .layout-ceiling{
-        display: inline-block;
-        overflow: hidden;
+    .layout-ceiling {
+        display  : inline-block;
+        overflow : hidden;
     }
 </style>
 <template>
@@ -89,10 +89,12 @@
                         <Icon type="navicon" size="32"></Icon>
                     </i-button>
                     <i-button class="pull-right" type="text" @click="toggleClick">
-                    <Icon type="location" size="32"></Icon>
+                        <Icon type="location" size="32"></Icon>
                     </i-button>
                 </div>
-                <modal :place="place"></modal>
+
+                <modal :place="place" @location-ok="setLocation"></modal>
+
                 <div class="layout-content">
                     <div class="layout-content-main">
                     </div>
@@ -111,6 +113,7 @@
             return {
                 spanLeft: 5,
                 spanRight: 19,
+                place: {},
             }
         },
         computed: {
@@ -127,12 +130,15 @@
                     this.spanLeft = 5;
                     this.spanRight = 19;
                 }
-            }
+            },
+            setLocation (location) {
+                this.place = location
+                console.log(this)
+            },
         },
-        components:{
+        components: {
             modal
-        },
-        props: ['msg','place']
+        }
     }
 </script>
 

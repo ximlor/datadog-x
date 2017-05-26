@@ -3,24 +3,18 @@
 </style>
 <template>
     <div>
-        <router-view :place="place"></router-view>
+        <router-view></router-view>
     </div>
 </template>
 <script>
     export default {
         data() {
-            return {
-                place:{}
-            };
+            return {};
         },
         mounted() {
-
         },
         beforeDestroy() {
-
         },
-        methods: {
-
-        }
+        methods: {}
     };
 </script>
