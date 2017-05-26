@@ -17,7 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'map'], function () {
+Route::group([
+    'prefix' => 'map',
+    'middleware' => ['cors'],
+], function () {
 
     Route::get('/', function () {
         return 'hello';

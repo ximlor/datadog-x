@@ -34,7 +34,7 @@ router.afterEach(() => {
 });
 
 
-
+Vue.prototype.$http = Util.ajax
 new Vue({
     el: '#app',
     router: router,

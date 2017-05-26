@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Cascader :data="data" v-model="value1" v-on:on-change="change" :load-data="loadData" size="large" trigger="hover"></Cascader>
-        <p>{{ msg }}</p>
+        <Cascader :data="data" v-model="value1" v-on:on-change="change" :load-data="loadData" size="large"
+                  trigger="hover" disabled></Cascader>
     </div>
 </template>
 <script>
@@ -9,59 +9,13 @@
         data () {
             return {
                 value1: [],
-                data: [{
-                    value: 'beijing',
-                    label: '北京',
-                    children: [
-                        {
-                            value: 'gugong',
-                            label: '故宫'
-                        },
-                        {
-                            value: 'tiantan',
-                            label: '天坛'
-                        },
-                        {
-                            value: 'wangfujing',
-                            label: '王府井'
-                        }
-                    ]
-                }, {
-                    value: 'jiangsu',
-                    label: '江苏',
-                    children: [
-                        {
-                            value: 'nanjing',
-                            label: '南京',
-                            children: [
-                                {
-                                    value: 'fuzimiao',
-                                    label: '夫子庙',
-                                }
-                            ]
-                        },
-                        {
-                            value: 'suzhou',
-                            label: '苏州',
-                            children: [
-                                {
-                                    value: 'zhuozhengyuan',
-                                    label: '拙政园',
-                                },
-                                {
-                                    value: 'shizilin',
-                                    label: '狮子林',
-                                }
-                            ]
-                        }
-                    ],
-                }]
+                data: [],
             }
         },
         methods: {
             change: function (value, selectedData) {
                 console.log(value, selectedData)
-                this.$emit('change', value)
+                this.$emit('change', value, selectedData)
             },
             loadData (item, callback) {
                 item.loading = true;
@@ -75,11 +29,11 @@
                     placeSearch.search('', function (status, result) {
                         //TODO : 按照自己需求处理查询结果
                         console.log(result)
-                        let pois=result.poiList.pois
-                        for(let i=0;i<pois.length;i++){
+                        let pois = result.poiList.pois
+                        for (let i = 0; i < pois.length; i++) {
                             item.children.push({
-                                value:pois[i]['location'],
-                                label:pois[i]['name'],
+                                value: pois[i]['location'],
+                                label: pois[i]['name'],
                             })
                         }
                         item.loading = false;
@@ -89,6 +43,11 @@
             }
         },
         created: function () {
+            this.$http.get('http://localhost:80/api/map/district/cities').then(response => {
+                console.log(response);
+            }).catch(error => {
+                console.log(error);
+            })
             let that = this
             AMap.service('AMap.DistrictSearch', function () {//回调函数
                 //实例化DistrictSearch

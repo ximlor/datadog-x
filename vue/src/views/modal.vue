@@ -37,11 +37,6 @@
         created: function () {
             this.modal1 = !this.place.name
             if (this.modal1) {
-                this.$http.get('/').then(response => {
-                    console.log(response);
-                }).catch(error => {
-                    console.log(error);
-                })
             }
         },
         components: {
