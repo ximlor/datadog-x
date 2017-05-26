@@ -26,7 +26,7 @@ services:
 
     node:
       build:
-        context: ./node
+        context: ./docker/node
       volumes_from:
         - applications
       tty: true
