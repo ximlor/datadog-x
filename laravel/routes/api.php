@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'map'], function () {
+
+    Route::get('/', function () {
+        return 'hello';
+    });
+
+    Route::group(['prefix' => 'district'], function () {
+        Route::get('/cities', 'MapController@cities');
+    });
+});
