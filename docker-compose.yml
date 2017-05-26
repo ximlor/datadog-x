@@ -46,3 +46,20 @@ services:
         - workspace
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
+
+### Nginx Server Container ##################################
+
+    nginx:
+      build:
+        context: ./docker/nginx
+        args:
+          - PHP_UPSTREAM=php-fpm
+      volumes_from:
+          - applications
+      volumes:
+          - ./logs:/var/log/nginx
+          - ./docker/nginx/sites:/etc/nginx/sites-available
+      ports:
+          - "80:80"
+      depends_on:
+          - php-fpm
