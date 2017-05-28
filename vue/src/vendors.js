@@ -4,3 +4,6 @@ import VueRouter from 'vue-router';
 import axios from 'axios';
 
 import echarts from 'echarts';
+
+import $ from 'jquery'
+import 'bootstrap/dist/js/bootstrap';

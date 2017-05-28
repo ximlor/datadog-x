@@ -73,9 +73,27 @@ services:
       ports:
         - "6379:6379"
 
+### Scrapy Container #########################################
+
+    scrapy:
+      build: ./docker/scrapy
+      volumes_from:
+        - applications
+
+### MongoDB Container #######################################
+
+    mongo:
+      build: ./docker/mongo
+      ports:
+        - "27017:27017"
+      volumes:
+        - mongo:/data/db
+
 ### Volumes Setup ###########################################
 
 volumes:
   redis:
+    driver: "local"
+  mongo:
     driver: "local"
 

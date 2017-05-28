@@ -57,4 +57,26 @@ class Map
         Redis::set($key_redis, json_encode($districts));
         return $districts;
     }
+
+    function place()
+    {
+        $params = [
+            'key' => config('amap.key_web'),
+            'types' => '高等院校',
+            'city' => '哈尔滨',
+            'citylimit' => true,
+        ];
+
+        $key_redis = urlencode('place:' . $params['city'] . ':' . $params['types']);
+        if ($cache = Redis::get($key_redis)) {
+            return json_decode($cache, true);
+        }
+
+        $url = 'http://restapi.amap.com/v3/place/text';
+        $result = json_decode(app('curl')->to($url)->withData($params)->get(), true) ?? [];
+
+        Redis::set($key_redis, json_encode($result));
+        Redis::expire($key_redis, 60);
+        return $result;
+    }
 }

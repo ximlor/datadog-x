@@ -12,7 +12,7 @@
     }
 
     .layout-content {
-        min-height    : 200px;
+        min-height    : 600px;
         margin        : 15px;
         overflow      : hidden;
         background    : #fff;
@@ -58,15 +58,11 @@
     .ivu-col {
         transition : width .2s ease-in-out;
     }
-
-    .layout-ceiling {
-        display  : inline-block;
-        overflow : hidden;
-    }
 </style>
 <template>
     <div class="layout" :class="{'layout-hide-text': spanLeft < 5}">
         <Row type="flex">
+
             <i-col :span="spanLeft" class="layout-menu-left">
                 <Menu active-name="1" theme="dark" width="auto">
                     <Menu-item name="1">
@@ -83,6 +79,7 @@
                     </Menu-item>
                 </Menu>
             </i-col>
+
             <i-col :span="spanRight">
                 <div class="layout-header">
                     <i-button type="text" @click="toggleClick">
@@ -97,8 +94,39 @@
 
                 <div class="layout-content">
                     <div class="layout-content-main">
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Plain Page</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Settings 1</a>
+                                                    </li>
+                                                    <li><a href="#">Settings 2</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        Add content to the page ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
                 <div class="layout-copy">
                     2017 &copy; ZZX
                 </div>

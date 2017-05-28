@@ -12,23 +12,23 @@ module.exports = {
     },
     module: {
         rules: [{
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
+            test: /\.vue$/,
+            loader: 'vue-loader',
+            options: {
+                loaders: {
 
-                        sass: ExtractTextPlugin.extract({
-                            use: ['css-loader?minimize', 'autoprefixer-loader', 'sass-loader'],
-                            fallback: 'vue-style-loader'
-                        }),
+                    sass: ExtractTextPlugin.extract({
+                        use: ['css-loader?minimize', 'autoprefixer-loader', 'sass-loader'],
+                        fallback: 'vue-style-loader'
+                    }),
 
-                        css: ExtractTextPlugin.extract({
-                            use: ['css-loader', 'autoprefixer-loader'],
-                            fallback: 'vue-style-loader'
-                        })
-                    }
+                    css: ExtractTextPlugin.extract({
+                        use: ['css-loader', 'autoprefixer-loader'],
+                        fallback: 'vue-style-loader'
+                    })
                 }
-            },
+            }
+        },
             {
                 test: /iview\/.*?js$/,
                 loader: 'babel-loader'
@@ -69,5 +69,12 @@ module.exports = {
         alias: {
             'vue': 'vue/dist/vue.esm.js'
         }
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            jQuery: "jquery",
+            $: "jquery",
+            jquery: 'jquery'
+        })
+    ]
 };

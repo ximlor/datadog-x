@@ -29,4 +29,8 @@ Route::group([
     Route::group(['prefix' => 'district'], function () {
         Route::get('/cities', 'MapController@cities');
     });
+
+    Route::group(['prefix' => 'place'], function () {
+        Route::get('/', 'MapController@places');
+    });
 });

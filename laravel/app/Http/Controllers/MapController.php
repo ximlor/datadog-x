@@ -22,4 +22,11 @@ class MapController extends Controller
         $districts = $repository->district('city');
         return compact('districts');
     }
+
+    public function places()
+    {
+        $repository = app('App\Map');
+        $places = $repository->place();
+        return compact('places');
+    }
 }
