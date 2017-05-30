@@ -79,6 +79,9 @@ services:
       build: ./docker/scrapy
       volumes_from:
         - applications
+      extra_hosts:
+          - "dockerhost:${DOCKER_HOST_IP}"
+      tty: true
 
 ### MongoDB Container #######################################
 

@@ -27,6 +27,6 @@ class MapController extends Controller
     {
         $repository = app('App\Map');
         $places = $repository->place();
-        return compact('places');
+        return $places;
     }
 }

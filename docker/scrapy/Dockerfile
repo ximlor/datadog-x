@@ -6,4 +6,6 @@ RUN pip install MySQL-python
 
 RUN pip install Geohash
 
+RUN pip install pymongo
+
 WORKDIR /var/www

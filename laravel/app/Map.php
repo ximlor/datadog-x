@@ -74,9 +74,18 @@ class Map
 
         $url = 'http://restapi.amap.com/v3/place/text';
         $result = json_decode(app('curl')->to($url)->withData($params)->get(), true) ?? [];
+        $pois = !empty($result['pois']) ? $result['pois'] : [];
+        $places = [];
+        foreach ($pois as $place) {
+            $places[] = [
+                'id' => $place['id'],
+                'name' => $place['name'],
+                'location' => $place['location'],
+            ];
+        }
 
-        Redis::set($key_redis, json_encode($result));
+        Redis::set($key_redis, json_encode($places));
         Redis::expire($key_redis, 60);
-        return $result;
+        return $places;
     }
 }
