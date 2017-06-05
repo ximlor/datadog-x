@@ -64,7 +64,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'eleme.pipelines.MongoPipeline': 300,
+    'eleme.pipelines.mongo.MongoPipeline': 300,
+    'eleme.mysqlpipelines.pipelines.ElemePipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -82,12 +83,23 @@ ITEM_PIPELINES = {
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-# HTTPCACHE_ENABLED = True
-# HTTPCACHE_EXPIRATION_SECS = 0
-# HTTPCACHE_DIR = 'httpcache'
-# HTTPCACHE_IGNORE_HTTP_CODES = []
-# HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+HTTPCACHE_ENABLED = True
+HTTPCACHE_EXPIRATION_SECS = 0
+HTTPCACHE_DIR = 'httpcache'
+HTTPCACHE_IGNORE_HTTP_CODES = []
+HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # MongoDB
 MONGO_URI = 'dockerhost'
 MONGO_DATABASE = 'test'
+
+# Mysql config
+MYSQL_HOST = '10.200.10.1'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = 'root'
+MYSQL_PORT = '3306'
+MYSQL_DB = 'test'
+
+# Log
+# LOG_FILE = 'logs/eleme.log'
+# LOG_FORMAT = '%(levelname)s %(asctime)s [%(name)s:%(module)s:%(funcName)s:%(lineno)s] [%(exc_info)s] %(message)s'

@@ -1,0 +1,36 @@
+DROP USER IF EXISTS 'MYSQL_USER'; 
+CREATE USER 'MYSQL_USER'@'%' IDENTIFIED BY 'MYSQL_PASSWORD'; 
+CREATE DATABASE IF NOT EXISTS `MYSQL_DATABASE`; 
+GRANT ALL ON `MYSQL_DATABASE`.* TO 'MYSQL_USER'@'%';
+
+USE `MYSQL_DATABASE`;
+
+CREATE TABLE `eleme_restaurants` (
+ `id` bigint(12) unsigned NOT NULL DEFAULT '0',
+ `name` varchar(512) NOT NULL DEFAULT '',
+ `recent_order_num` int(6) unsigned NOT NULL DEFAULT '0',
+ `average_cost` varchar(512) NOT NULL DEFAULT '',
+ `address` varchar(1024) NOT NULL DEFAULT '',
+ `geohash` varchar(512) NOT NULL,
+ `distance` int(10) NOT NULL DEFAULT '0',
+ PRIMARY KEY (`id`),
+ KEY `name` (`name`),
+ KEY `recent_order_num` (`recent_order_num`),
+ KEY `distance` (`distance`),
+ KEY `geohash` (`geohash`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `eleme_food` (
+ `food_id` bigint(12) unsigned NOT NULL DEFAULT '0',
+ `name` varchar(512) NOT NULL DEFAULT '',
+ `restaurant_id` bigint(12) unsigned NOT NULL DEFAULT '0',
+ `item_id` bigint(12) NOT NULL DEFAULT '0',
+ `price` int(3) NOT NULL DEFAULT '0',
+ `recent_popularity` int(6) NOT NULL DEFAULT '0',
+ PRIMARY KEY (`food_id`),
+ KEY `name` (`name`),
+ KEY `restaurant_id` (`restaurant_id`),
+ KEY `item_id` (`item_id`),
+ KEY `price` (`price`),
+ KEY `recent_popularity` (`recent_popularity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
